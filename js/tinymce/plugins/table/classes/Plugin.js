@@ -597,6 +597,21 @@ define("tinymce/tableplugin/Plugin", [
 			}
 		});
 
+		//add extra toolbar buttons (for row, column and cell operations.
+		if (editor.getParam("table_extra_toolbar_buttons", false) === true) {
+			each(menuItems, function(item) {
+				if ("menu" in item) {
+					editor.addButton(item.text.toLowerCase().replace(/ /, '-'), {
+						type: "menubutton",
+						title: item.text,
+						menu: item.menu});
+				}
+				else {
+					editor.addButton(item.text.toLowerCase().replace(/ /, '-'), {title: item.text});
+				}
+			});
+		}
+
 		editor.addButton("table", {
 			type: "menubutton",
 			title: "Table",
